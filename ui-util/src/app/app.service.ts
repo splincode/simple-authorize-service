@@ -8,7 +8,7 @@ export type InternalStateType = {
 export class AppState {
 
   public _state: InternalStateType = {
-    rest: "http://localhost:8080"
+    rest: "https://localhost:8080"
   };
 
 

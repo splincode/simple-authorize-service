@@ -23,11 +23,10 @@ export class AuthComponent implements OnInit {
   constructor(public appState: AppState, public jsonp: Jsonp, public httpClient: HttpClient, private router: Router) {}
 
   public ngOnInit() {
-    parent.postMessage(JSON.stringify({type: "close"}), "*");
+    //parent.postMessage(JSON.stringify({type: "close"}), "*");
 
     let loginIsTrue = sessionStorage.getItem("authorize");
     if (loginIsTrue) {
-
       //this.router.navigate(['home']);
     }
 

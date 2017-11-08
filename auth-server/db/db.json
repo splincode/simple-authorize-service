@@ -1,6 +1,21 @@
 {
-	"people": [
-		{"admin" : "123"},
-		{"user" : "1234"}
-	]
+    "users": {
+        "admin": {
+            "password": "123",
+            "group": "owner"
+        },
+        "user": {
+            "password": "1234",
+            "group": "member"
+        },
+        "maxim": {
+            "password": "1234",
+            "group": "member"
+        },
+        "tesla": {
+            "password": "18d2d9",
+            "group": "member",
+            "secure": "true"
+        }
+    }
 }
