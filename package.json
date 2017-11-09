@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "auth-server": "node auth-server/server.js",
+    "dev": "concurrently 'npm run auth-server'"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,6 +19,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "concurrently": "^3.5.0",
     "electron": "~1.7.8",
     "express-session": "^1.15.6"
   }

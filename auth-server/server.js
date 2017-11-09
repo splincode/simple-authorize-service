@@ -7,6 +7,8 @@ const router = express.Router();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dataWorker = require('./util/data-worker');
+const path = require("path");
+
 const databasePath = "db/db.json";
 const port = {
     base: false,
@@ -15,10 +17,11 @@ const port = {
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
-const privateKeySSL = fs.readFileSync('../encryption/simple-authorize-service.private.key', 'utf8');
+const privateKeySSL = fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.private.key'), 'utf8');
+
 const options = {
     key: privateKeySSL,
-    cert: fs.readFileSync('../encryption/simple-authorize-service.certificate.crt', 'utf8'),
+    cert: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.certificate.crt'), 'utf8'),
     requestCert: true
 };
 
@@ -28,7 +31,7 @@ app.use(session({
     secret: privateKeySSL,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000000000 },
+    cookie: {maxAge: 60000000000},
 }));
 
 app.use(bodyParser.urlencoded({
@@ -45,21 +48,21 @@ app.use('/login', function requiresLogin(req, res, next) {
     let isSecure = false;
 
     if (user.secure) {
-    	isSecure = true;
+        isSecure = true;
     }
 
     let authenticate = (isSecure ? decrypt(user.password) : user.password) === req.query.password;
     let userCurrent, userGroup;
 
     if (authenticate) {
-    	userCurrent = req.session.username = req.query.user;
-    	userGroup = req.session.group = user.group;
+        userCurrent = req.session.username = req.query.user;
+        userGroup = req.session.group = user.group;
     } else {
-    	req.session.destroy();
+        req.session.destroy();
     }
 
     res.jsonp({
-    	success: authenticate,
+        success: authenticate,
         username: userCurrent,
         group: userGroup,
         message: !authenticate ? "NOT_ALLOWED" : undefined
@@ -68,11 +71,10 @@ app.use('/login', function requiresLogin(req, res, next) {
 });
 
 app.use('/logout', function (req, res) {
-  req.session.destroy();
-  res.jsonp({
-    	success: true,
-        data: {
-        }
+    req.session.destroy();
+    res.jsonp({
+        success: true,
+        data: {}
     });
 });
 
@@ -88,72 +90,72 @@ app.use('/api', function requiresLogin(req, res, next) {
     }
 }, router);
 
-router.get('/', function(req, res) {
-    res.jsonp({ message: "" });
+router.get('/', function (req, res) {
+    res.jsonp({message: ""});
 });
 
-router.get('/create-user', function(req, res) {
+router.get('/create-user', function (req, res) {
 
-	if (req.session.group === "owner") {
-		
-		let userName = req.query.user;
-		let password = req.query.password;
-		let group = req.query.group || "member";
-		let secure = req.query.secure || false;
+    if (req.session.group === "owner") {
 
-		if (userName && password) {
+        let userName = req.query.user;
+        let password = req.query.password;
+        let group = req.query.group || "member";
+        let secure = req.query.secure || false;
 
-			let db = dataWorker(databasePath);
-			let userSave = db.users[userName] || false;
-			console.log("userSave", userSave, typeof userSave)
-			if (userSave) {
-				
-				res.jsonp({
-					success: false,
-				    message: "USER_EXISTS"
-				});
+        if (userName && password) {
 
-			} else {
+            let db = dataWorker(databasePath);
+            let userSave = db.users[userName] || false;
+            console.log("userSave", userSave, typeof userSave)
+            if (userSave) {
 
-				db.users[userName] = {
-					password: secure ? encrypt(password) : password,
-					group: group,
-					secure: secure
-				};
+                res.jsonp({
+                    success: false,
+                    message: "USER_EXISTS"
+                });
 
-				db.save();
+            } else {
 
+                db.users[userName] = {
+                    password: secure ? encrypt(password) : password,
+                    group: group,
+                    secure: secure
+                };
 
-				res.jsonp({
-					success: true,
-				    data: {
-				    	user: userName,
-				    	password: password
-				    }
-				});
-			}
+                db.save();
 
 
-		} else {
-			res.jsonp({
-				success: false,
-			    message: "EMPTY_LOGIN_PASSWORD"
-			});
-		}
+                res.jsonp({
+                    success: true,
+                    data: {
+                        user: userName,
+                        password: password
+                    }
+                });
+            }
 
-	} else {
-		res.jsonp({
-			success: false,
-		    message: "ACCESS_DENIED"
-		});
-	}
+
+        } else {
+            res.jsonp({
+                success: false,
+                message: "EMPTY_LOGIN_PASSWORD"
+            });
+        }
+
+    } else {
+        res.jsonp({
+            success: false,
+            message: "ACCESS_DENIED"
+        });
+    }
 });
 
-router.route('/people').get(function(req, res) {
+router.route('/people').get(function (req, res) {
     let peopleResult = [];
     let data = JSON.parse(fs.readFileSync(databasePath, 'utf8')) || {
-        people: []
-    };
+            people: []
+        };
     data.people.forEach(person => peopleResult.push(Object.keys(person)[0]));
     res.jsonp({
         message: peopleResult
@@ -161,28 +163,28 @@ router.route('/people').get(function(req, res) {
 });
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
 
-https.createServer(options, app).listen(port.secure, function() {
+https.createServer(options, app).listen(port.secure, function () {
     console.log('Listen on port ' + 'https://localhost:' + port.secure);
 });
 
 
-function encrypt(text){
-  var cipher = crypto.createCipher(algorithm, privateKeySSL);
-  var crypted = cipher.update(text,'utf8','hex');
-  crypted += cipher.final('hex');
-  return crypted;
+function encrypt(text) {
+    var cipher = crypto.createCipher(algorithm, privateKeySSL);
+    var crypted = cipher.update(text, 'utf8', 'hex');
+    crypted += cipher.final('hex');
+    return crypted;
 }
- 
-function decrypt(text){
-  var decipher = crypto.createDecipher(algorithm, privateKeySSL);
-  var dec = decipher.update(text,'hex','utf8');
-  dec += decipher.final('utf8');
-  return dec;
+
+function decrypt(text) {
+    var decipher = crypto.createDecipher(algorithm, privateKeySSL);
+    var dec = decipher.update(text, 'hex', 'utf8');
+    dec += decipher.final('utf8');
+    return dec;
 }
