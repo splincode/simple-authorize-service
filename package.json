@@ -5,8 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "auth-server": "node auth-server/server.js",
-    "dev": "concurrently 'npm run auth-server'"
+    "auth-server": "nodemon auth-server/server.js --ignore 'auth-server/*/*.json'",
+    "frontend-server": "nodemon frontend-server/server.js",
+    "serve": "cd ui-util/ && ng build -w",
+    "dev": "start npm run auth-server && start npm run frontend-server && start npm run serve"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [

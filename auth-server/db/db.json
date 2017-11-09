@@ -16,6 +16,17 @@
             "password": "18d2d9",
             "group": "member",
             "secure": "true"
+        },
+        "avk": {
+            "password": "5f1076",
+            "group": "member",
+            "secure": "true"
+        },
+        "splincode": {
+            "password": "5f1076741c",
+            "group": "member",
+            "secure": "true",
+            "first": false
         }
     }
 }

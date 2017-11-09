@@ -52,20 +52,24 @@ app.use('/login', function requiresLogin(req, res, next) {
     }
 
     let authenticate = (isSecure ? decrypt(user.password) : user.password) === req.query.password;
-    let userCurrent, userGroup;
+    let userCurrent, userGroup, isFirst;
 
     if (authenticate) {
         userCurrent = req.session.username = req.query.user;
         userGroup = req.session.group = user.group;
+        isFirst = user.first || false;
     } else {
         req.session.destroy();
     }
 
     res.jsonp({
         success: authenticate,
-        username: userCurrent,
-        group: userGroup,
-        message: !authenticate ? "NOT_ALLOWED" : undefined
+        data: {
+        	username: userCurrent,
+        	group: userGroup,
+        	message: !authenticate ? "NOT_ALLOWED" : undefined,
+        	first: isFirst
+        }
     });
 
 });
@@ -94,6 +98,33 @@ router.get('/', function (req, res) {
     res.jsonp({message: ""});
 });
 
+router.get('/change-password', function (req, res) {
+	let username = req.session.username;
+	let password = req.query.password;
+	if (username) {
+		let db = dataWorker(databasePath);
+        db.users[username].password = db.users[username].secure ? encrypt(password) : password;
+        db.users[username].first = false;
+        db.save();
+
+        res.jsonp({
+            success: true,
+            data: {
+            }
+        });
+	}
+});
+
+router.get('/state', function (req, res) {
+    res.jsonp({
+        success: true,
+        data: {
+        	session: req.session
+        }
+    });
+	
+});
+
 router.get('/create-user', function (req, res) {
 
     if (req.session.group === "owner") {
@@ -107,7 +138,7 @@ router.get('/create-user', function (req, res) {
 
             let db = dataWorker(databasePath);
             let userSave = db.users[userName] || false;
-            console.log("userSave", userSave, typeof userSave)
+
             if (userSave) {
 
                 res.jsonp({
@@ -120,11 +151,11 @@ router.get('/create-user', function (req, res) {
                 db.users[userName] = {
                     password: secure ? encrypt(password) : password,
                     group: group,
-                    secure: secure
+                    secure: secure,
+                    first: true
                 };
 
                 db.save();
-
 
                 res.jsonp({
                     success: true,

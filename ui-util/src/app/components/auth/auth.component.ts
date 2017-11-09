@@ -8,6 +8,19 @@ import { AppState } from '../../app.service';
 import {HttpClient} from "@angular/common/http";
 import {Jsonp, URLSearchParams} from "@angular/http";
 
+
+export enum TypeError {
+  NOT_ALLOW,
+  IS_EMPTY,
+  NOT_EQUALS,
+  NOT_SAVE
+};
+
+export enum TypeAuthStep {
+  Authorize,
+  ChangePassword
+};
+
 @Component({
   selector: 'auth',
   encapsulation: ViewEncapsulation.None,
@@ -16,19 +29,22 @@ import {Jsonp, URLSearchParams} from "@angular/http";
 })
 export class AuthComponent implements OnInit {
 
-  public isEmpty: boolean;
+  public typeError: number;
+  public typeAuthStep: number = TypeAuthStep.Authorize;
+  public TypeError = TypeError;
+  public TypeAuthStep = TypeAuthStep;
+
+  /* Авторизация */
   public name: string;
   public password: string;
 
-  constructor(public appState: AppState, public jsonp: Jsonp, public httpClient: HttpClient, private router: Router) {}
+  /* Смена пароля */
+  public newPassword: string;
+  public detectNewPassword: string;
+
+  constructor(public appState: AppState, public jsonp: Jsonp, private router: Router) {}
 
   public ngOnInit() {
-    //parent.postMessage(JSON.stringify({type: "close"}), "*");
-
-    let loginIsTrue = sessionStorage.getItem("authorize");
-    if (loginIsTrue) {
-      //this.router.navigate(['home']);
-    }
 
   }
 
@@ -39,25 +55,65 @@ export class AuthComponent implements OnInit {
       let params = new URLSearchParams();
       params.set('format', 'json');
       params.set('callback', 'JSONP_CALLBACK');
+      params.set('user', login);
+      params.set('password', password);
 
-      this.jsonp.get(this.appState.get("rest") + "/api/people", { search: params }).subscribe(data => {
-        console.log(data.json())
+      this.jsonp.get(this.appState.get("rest") + "/login", { search: params }).subscribe(data => {
+        let dataInformation = data.json();
+
+        if (dataInformation.success) {
+
+          this.typeError = null;
+          this.appState.set("username", dataInformation.data.username);
+          this.appState.set("group", dataInformation.data.group);
+          sessionStorage.setItem("authorize", dataInformation.data.username);
+
+          if (dataInformation.data.first) {
+            this.typeAuthStep = TypeAuthStep.ChangePassword;
+          } else {
+            this.router.navigate(['home']);
+          }
+
+        } else {
+          this.typeError = TypeError.NOT_ALLOW;
+        }
+
       });
 
-      /*this.httpClient.get("/api/people").subscribe((result) => {
-        console.log(result)
-      });*/
-
-      /*sessionStorage.setItem("authorize", login);
-
-      this.appState.set("login", login);
-
-      this.router.navigate(['home']);*/
-
     } else {
+      this.typeError = TypeError.IS_EMPTY;
+    }
 
-      this.isEmpty = true;
+  }
 
+  public changePassword(newPassword: string = '', detectNewPassword: string = '') {
+
+    if (newPassword.trim() && detectNewPassword.trim()) {
+      if (newPassword !== detectNewPassword) {
+        this.typeError = TypeError.NOT_EQUALS;
+      } else {
+
+        this.typeError = null;
+
+        let params = new URLSearchParams();
+        params.set('format', 'json');
+        params.set('callback', 'JSONP_CALLBACK');
+        params.set('password', newPassword);
+
+        this.jsonp.get(this.appState.get("rest") + "/api/change-password", { search: params }).subscribe(data => {
+          let dataInformation = data.json();
+
+          if (dataInformation.success) {
+            this.router.navigate(['home']);
+          } else {
+            this.typeError = TypeError.NOT_SAVE;
+          }
+
+        });
+
+      }
+    } else {
+      this.typeError = TypeError.IS_EMPTY;
     }
 
   }
