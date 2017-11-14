@@ -1,9 +1,15 @@
 <div class="container">
 
-	<div id="contact">
-		<h1>Добро пожаловать</h1>
-		<h4>никнейм: {{ name }}</h4>
-		<a href="#" (click)="logout()">выйти из личного кабинета</a>
+	<div class="contact">
+		<h3>Личный кабинет</h3>
+		<h4>
+			ваш никнейм: {{ name }}, 
+			ваша группа: {{ TypeGroup[group] }}
+		</h4>
+
+		<button *ngIf="TypeGroup[group] === TypeGroup.owner" class="myButton" (click)="getUserList()">Cписок пользователей</button>
+		<button class="myButton" [routerLink]="['/user-info', name]">Настройки пользователя</button>
+		<button class="myButton" (click)="preLogout()">Выйти из личного кабинета</button>
 	</div>
 
 </div>	

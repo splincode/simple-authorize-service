@@ -1,0 +1,39 @@
+<div class="container">
+
+	<div class="contact">
+		<h3>О пользователе</h3>
+		<h4>
+			ваш никнейм: {{ name }}, 
+			ваша группа: {{ TypeGroup[group] }}
+			<br><hr>
+			выбранный пользователь: {{ username }} <br>
+			группа пользователя: {{ TypeGroup[userInfo?.group] }} <br>
+			<span *ngIf="userInfo?.active">
+				пароль: 
+				<span *ngIf="userInfo?.secure" style="color:green">шифруется</span>
+				<span *ngIf="!userInfo?.secure" style="color:red">не шифруется</span> <br>
+			</span>
+			ограничение на пароль: 
+			<span *ngIf="userInfo?.regexp" [attr.title]="'/' + userInfo?.regexp + '/'" style="color:green">задано</span>
+			<span *ngIf="!userInfo?.regexp" style="color:red">не задано</span> <br>
+			статус:
+			<span *ngIf="userInfo?.active" style="color:green">активен</span>
+			<span *ngIf="!userInfo?.active" style="color:red">заблокирован</span> <br>
+		</h4>
+
+		<button *ngIf="TypeGroup[group] === TypeGroup.owner && name !== username && userInfo?.active" class="myButton" (click)="blockUser(username)">
+			Заблокировать пользователя
+		</button>
+		<button *ngIf="TypeGroup[group] === TypeGroup.owner && name !== username && !userInfo?.active" class="myButton" (click)="unBlockUser(username)">
+			Разблокировать пользователя
+		</button>
+		<button *ngIf="TypeGroup[group] === TypeGroup.owner && name !== username" class="myButton" (click)="removeUser(username)">
+			Удалить пользователя
+		</button>
+		<button *ngIf="name === username" class="myButton" [routerLink]="['/change-password']">Сменить пароль</button>
+		<button class="myButton" *ngIf="TypeGroup[group] === TypeGroup.owner" (click)="setPasswordConstraint(username)">Установить парольное ограничение</button>
+		<button class="myButton" [routerLink]="['/home']">Перейти на главную</button>
+
+	</div>
+
+</div>	

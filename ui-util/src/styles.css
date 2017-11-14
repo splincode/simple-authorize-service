@@ -1,1 +1,312 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 30px;
+  color: #777;
+}
+
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+body {
+ width: 100%;
+ top: 0;
+ height: 100%;
+ position: absolute;
+}
+
+a.active {
+  background-color: gray;
+}
+
+.container {
+  max-width: 425px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+.contact {
+  background: #F9F9F9;
+  padding: 45px 25px;
+  margin: 120px 0 0 0;
+  border: #ccc 1px solid;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px #d1d1d1;
+}
+
+.contact h3 {
+  display: block;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+
+input[type=checkbox] {
+    margin-top: 0px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+.contact h4 {
+  margin: 5px 0 15px;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+.contact {
+  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.contact input[type]:not([type=checkbox]),
+.contact textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+.contact input[type]:hover,
+.contact textarea:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+
+.contact textarea {
+  height: 100px;
+  max-width: 100%;
+  resize: none;
+}
+
+.contact button[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.contact button[type="submit"]:hover {
+  background: #43A047;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.contact button[type="submit"]:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.copyright {
+  text-align: center;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  outline: 0;
+  border: 1px solid #aaa;
+}
+
+::-webkit-input-placeholder {
+  color: #888;
+}
+
+:-moz-placeholder {
+  color: #888;
+}
+
+::-moz-placeholder {
+  color: #888;
+}
+
+:-ms-input-placeholder {
+  color: #888;
+}
+
+.invalid {
+  color: #d23d24 !important;
+}
+
+.myButton {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background-color:#ffffff;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  cursor:pointer;
+  color:#777777;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:9px 28px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #ffffff;
+  margin-bottom: 10px;
+  width: 100%;
+  border: #ccc 1px solid;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px #d1d1d1;
+}
+.myButton:hover {
+  background: #f2f2f2;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+  background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);  
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+
+table a:link {
+  color: #666;
+  font-weight: bold;
+  text-decoration:none;
+}
+table a:visited {
+  color: #999999;
+  font-weight:bold;
+  text-decoration:none;
+}
+table a:active,
+table a:hover {
+  color: #bd5a35;
+  text-decoration:underline;
+}
+table {
+  font-family:Arial, Helvetica, sans-serif;
+  color:#666;
+  font-size:12px;
+  text-shadow: 1px 1px 0px #fff;
+  background:#eaebec;
+  margin:20px 0;
+  border:#ccc 1px solid;
+  width: 100%;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+
+  -moz-box-shadow: 0 1px 2px #d1d1d1;
+  -webkit-box-shadow: 0 1px 2px #d1d1d1;
+  box-shadow: 0 1px 2px #d1d1d1;
+}
+table th {
+  padding: 11px 15px 12px 15px;
+  border-top:1px solid #fafafa;
+  border-bottom:1px solid #e0e0e0;
+
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+  background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+table th:first-child {
+  text-align: left;
+  text-align: center;
+}
+table tr:first-child th:first-child {
+  -moz-border-radius-topleft:3px;
+  -webkit-border-top-left-radius:3px;
+  border-top-left-radius:3px;
+}
+table tr:first-child th:last-child {
+  -moz-border-radius-topright:3px;
+  -webkit-border-top-right-radius:3px;
+  border-top-right-radius:3px;
+}
+table tr {
+  text-align: center;
+  padding-left:20px;
+}
+table td:first-child {
+  text-align: left;
+  padding-left:20px;
+  border-left: 0;
+}
+table td {
+  padding:8px;
+  border-top: 1px solid #ffffff;
+  border-bottom:1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+
+  background: #fafafa;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+  background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table tr.even td {
+  background: #f6f6f6;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+  background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+table tr:last-child td {
+  border-bottom:0;
+}
+table tr:last-child td:first-child {
+  -moz-border-radius-bottomleft:3px;
+  -webkit-border-bottom-left-radius:3px;
+  border-bottom-left-radius:3px;
+}
+table tr:last-child td:last-child {
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-bottom-right-radius:3px;
+}
+table tr:hover td {
+  background: #f2f2f2;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+  background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);  
+}
+
+select {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #FFF;
+    margin: 0 0 5px;
+    padding: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+hr {
+  margin: 10px 0;
+}

@@ -1,0 +1,48 @@
+<div class="container">
+
+	<div class="contact">
+		<h3>Список пользователей</h3>
+		<h4>
+			ваш никнейм: {{ name }}, 
+			ваша группа: {{ TypeGroup[group] }}
+		</h4>
+
+		<div>
+
+			<button class="myButton" (click)="createUser()">Создать пользователя</button>
+			<button class="myButton" (click)="cancel()">Перейти на главную</button>
+
+			<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+
+				<!-- Table Header -->
+				<thead>
+					<tr>
+						<th>Пользователь</th>
+						<th>Группа</th>
+						<th>Подробнее</th>
+					</tr>
+				</thead>
+				<!-- Table Header -->
+
+				<!-- Table Body -->
+				<tbody>
+
+					<tr *ngFor="let user of userList;">
+						<td><span [ngStyle]="{'color': user.active ? 'green' : 'red'}">{{user.username}}</span></td>
+						<td>{{TypeGroup[user.group]}}</td>
+						<td><a [routerLink]="['/user-info', user.username]">посмотреть</a></td>
+					</tr><!-- Table Row -->
+
+				</tbody>
+				<!-- Table Body -->
+
+			</table>
+
+			<span style="color: green">*активные</span>
+			<span style="color: red">*заблокированные</span>
+
+		</div>
+
+	</div>
+
+</div>	

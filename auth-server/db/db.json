@@ -1,32 +1,22 @@
 {
     "users": {
         "admin": {
-            "password": "123",
-            "group": "owner"
+            "username": "admin",
+            "password": "4cdb142cb0",
+            "group": "owner",
+            "secure": true,
+            "first": false,
+            "active": true,
+            "regexp": ""
         },
-        "user": {
-            "password": "1234",
-            "group": "member"
-        },
-        "maxim": {
-            "password": "1234",
-            "group": "member"
-        },
-        "tesla": {
-            "password": "18d2d9",
+        "mivanov": {
+            "username": "mivanov",
+            "password": "",
+            "first": true,
+            "active": true,
+            "secure": true,
             "group": "member",
-            "secure": "true"
-        },
-        "avk": {
-            "password": "5f1076",
-            "group": "member",
-            "secure": "true"
-        },
-        "splincode": {
-            "password": "5f1076741c",
-            "group": "member",
-            "secure": "true",
-            "first": false
+            "regexp": ""
         }
     }
 }

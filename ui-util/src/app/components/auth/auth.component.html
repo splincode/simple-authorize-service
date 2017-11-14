@@ -1,44 +1,47 @@
 <div class="container">  
   
-  <form id="contact" *ngIf="typeAuthStep == TypeAuthStep.Authorize">
+  <form class="contact" *ngIf="typeAuthStep == TypeAuthStep.Authorize">
     <h3>Добро пожаловать</h3>
     <h4>Для входа в систему необходимо заполнить все поля</h4>
+    
     <fieldset>
-      <input placeholder="Ваше имя" type="text" tabindex="1" [(ngModel)]="name" name="name" required autofocus>
+      <input placeholder="*Ваш логин" type="text" tabindex="1" [(ngModel)]="name" name="name" required autofocus>
     </fieldset>
     <fieldset>
-      <input placeholder="Ваш пароль" type="password" tabindex="2" [(ngModel)]="password" name="password" required>
+      <input placeholder="Ваш пароль" type="password" tabindex="2" [(ngModel)]="password" name="password">
     </fieldset>
    
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" (click)="login(name, password)">Авторизоваться</button>
     </fieldset>
 
-    <p class="invalid" *ngIf="typeError == TypeError.IS_EMPTY">Не все поля заполнены</p>
-    <p class="invalid" *ngIf="typeError == TypeError.NOT_ALLOW">Такого пользователя не существует <br> или логин и пароль не совпадают</p>
+    <p class="invalid" *ngIf="typeError == TypeError.IS_EMPTY">Не заполнено обязательное поле</p>
+    <p class="invalid" *ngIf="typeError == TypeError.NOT_EXIST">Такого пользователя не существует</p>
+    <p class="invalid" *ngIf="typeError == TypeError.NOT_ALLOW">Логин или пароль не совпадают</p>
+    <p class="invalid" *ngIf="typeError == TypeError.USER_BLOCKED">Пользователь заблокирован</p>
 
   </form>
 
-
-  <form id="contact" *ngIf="typeAuthStep == TypeAuthStep.ChangePassword">
+  <form class="contact" *ngIf="typeAuthStep == TypeAuthStep.ChangePassword">
     <h3>Смена пароля</h3>
     <h4>Вы заходите в систему первый раз <br> Необходимо сменить пароль </h4>
 
     <fieldset>
-      <input placeholder="Новый пароль" type="password" tabindex="2" [(ngModel)]="newPassword" name="password" required>
+      <input placeholder="Новый пароль" type="password" tabindex="2" [(ngModel)]="newPassword" name="newPassword" required>
     </fieldset>
 
     <fieldset>
-      <input placeholder="Повторить пароль" type="password" tabindex="2" [(ngModel)]="detectNewPassword" name="password" required>
+      <input placeholder="Повторить пароль" type="password" tabindex="2" [(ngModel)]="detectNewPassword" name="detectNewPassword" required>
     </fieldset>
    
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" (click)="changePassword(newPassword, detectNewPassword)">Сменить пароль</button>
+      <button name="submit" type="submit" id="contact-submit" (click)="changePassword(newPassword, detectNewPassword, detectSecure)">Сменить пароль</button>
     </fieldset>
 
     <p class="invalid" *ngIf="typeError == TypeError.IS_EMPTY">Не все поля заполнены</p>
     <p class="invalid" *ngIf="typeError == TypeError.NOT_EQUALS">Пароли не совпадают</p>
-    <p class="invalid" *ngIf="typeError == TypeError.NOT_SAVE">Не удалось сохранить</p>
+    <p class="invalid" *ngIf="typeError == TypeError.NOT_SAVE">Новый пароль должен отличаться от старого</p>
+    <p class="invalid" *ngIf="typeError == TypeError.BAD_HINT" [attr.title]="regexp">Пароль не подходит под требования</p>
 
   </form>
 

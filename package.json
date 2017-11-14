@@ -5,10 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "auth-server": "nodemon auth-server/server.js --ignore 'auth-server/*/*.json'",
-    "frontend-server": "nodemon frontend-server/server.js",
+    "auth-server": "nodemon auth-server/server.js --ignore 'auth-server/*/*.json' --ignore 'frontend-server' --ignore 'ui-util/*'",
+    "auth-server-prod": "node auth-server/server.js",
+    "frontend-server": "nodemon frontend-server/server.js --ignore 'auth-server/*/*.json' --ignore 'ui-util/*'",
+    "frontend-server-prod": "node frontend-server/server.js",
     "serve": "cd ui-util/ && ng build -w",
-    "dev": "start npm run auth-server && start npm run frontend-server && start npm run serve"
+    "build": "cd ui-util/ && ng build --aot",
+    "dev": "start npm run auth-server && start npm run frontend-server && start npm run serve",
+    "prod": "start npm run auth-server-prod && start npm run frontend-server-prod && start timeout 10 && npm run start"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -22,6 +26,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "concurrently": "^3.5.0",
+    "dialogs": "^1.1.20",
     "electron": "~1.7.8",
     "express-session": "^1.15.6"
   }

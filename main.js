@@ -8,10 +8,11 @@ const url = require('url');
 let mainWindow;
 
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
+app.commandLine.appendSwitch('allow-file-access-from-files', 'true');
 
 function createWindow() {
   
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({width: 800, height: 700});
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'main.html'),
@@ -21,7 +22,7 @@ function createWindow() {
 
     mainWindow.setMenu(null);
 
-    mainWindow.openDevTools();
+    //mainWindow.openDevTools();
     mainWindow.on('closed', function () {
         mainWindow = null
     });

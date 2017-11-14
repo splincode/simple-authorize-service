@@ -59,3 +59,11 @@ If you enter '.', the field will be left blank.
 ```
 $ certutil.exe -addstore -f -user -v Root simple-authorize-service.certificate.crt
 ```
+
+![](https://habrastorage.org/webt/8q/jh/wx/8qjhwx0wcjx13aylqboarnpbvfe.png)
+
+![](https://habrastorage.org/webt/yr/ll/hm/yrllhm77zlvvljis1c2zkibdrxg.png)
+
+![](https://habrastorage.org/webt/ve/v0/la/vev0larn3x4dagfhnatrpag5sqw.png)
+
+![](https://habrastorage.org/webt/vd/6y/t9/vd6yt95o7qx71rova8rg7y19ogi.png)

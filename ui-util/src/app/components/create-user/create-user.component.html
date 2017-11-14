@@ -1,0 +1,51 @@
+<div class="container">  
+
+  <form class="contact">
+    <h3>Новый пользователь</h3>
+    <!-- <h4>Вы заходите в систему первый раз <br> Необходимо сменить пароль </h4> -->
+
+    <fieldset>
+      <input placeholder="*Имя пользователя" type="text" tabindex="2" [(ngModel)]="userName" name="userName" required>
+    </fieldset>
+
+    <fieldset>
+      <input placeholder="Пароль (минимум символов: 0)" type="password" tabindex="2" [(ngModel)]="newPassword" name="newPassword">
+    </fieldset>
+
+    <fieldset>
+      <input placeholder="Повторить пароль (минимум символов: 0)" type="password" tabindex="2" [(ngModel)]="detectNewPassword" name="detectNewPassword">
+    </fieldset>
+
+    <p>Роль пользователя:</p>
+    <select [(ngModel)]="newGroup" name="group">
+        <option [attr.selected]="true" disabled="">Выберите роль пользователя</option>
+        <option [attr.value]="'member'">{{TypeGroup['member']}}</option>
+        <option [attr.value]="'owner'">{{TypeGroup['owner']}}</option>
+     </select>
+
+
+    <fieldset>
+      <br>
+      <label>
+        <input type="checkbox" tabindex="2" [(ngModel)]="detectSecure" name="detectSecure" required>
+        Шифровать пароль
+      </label>
+    </fieldset>
+   
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" (click)="createUser(userName, newPassword, detectNewPassword, detectSecure, newGroup)">
+      Создать пользователя
+      </button>
+    </fieldset>
+
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" (click)="cancel()">Отмена</button>
+    </fieldset>
+
+    <p class="invalid" *ngIf="typeError == TypeError.IS_EMPTY">Не заполнено обязательное поле</p>
+    <p class="invalid" *ngIf="typeError == TypeError.NOT_EQUALS">Пароли не совпадают</p>
+    <p class="invalid" *ngIf="typeError == TypeError.NOT_SAVE">Такой пользователь уже существует</p>
+
+  </form>
+
+</div>
