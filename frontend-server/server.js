@@ -11,8 +11,8 @@ const port = {
 };
 
 const options = {
-    key: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.private.key'), 'utf8'),
-    cert: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.certificate.crt'), 'utf8'),
+    key: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/server.key'), 'utf8'),
+    cert: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/server.crt'), 'utf8'),
     requestCert: true
 };
 

@@ -17,11 +17,11 @@ const port = {
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
-const privateKeySSL = fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.private.key'), 'utf8');
+const privateKeySSL = fs.readFileSync(path.resolve(__dirname, '..', 'encryption/server.key'), 'utf8');
 
 const options = {
     key: privateKeySSL,
-    cert: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/simple-authorize-service.certificate.crt'), 'utf8'),
+    cert: fs.readFileSync(path.resolve(__dirname, '..', 'encryption/server.crt'), 'utf8'),
     requestCert: true
 };
 

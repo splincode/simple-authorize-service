@@ -2,21 +2,12 @@
     "users": {
         "admin": {
             "username": "admin",
-            "password": "4cdb142cb0",
+            "password": "4cdb14",
             "group": "owner",
             "secure": true,
-            "first": false,
-            "active": true,
-            "regexp": ""
-        },
-        "mivanov": {
-            "username": "mivanov",
-            "password": "",
             "first": true,
             "active": true,
-            "secure": true,
-            "group": "member",
-            "regexp": ""
+            "regexp": "^([а-яё]+[a-z]+)$"
         }
     }
 }

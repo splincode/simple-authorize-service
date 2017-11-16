@@ -1,0 +1,29 @@
+###############################################
+# Remaining options below  should not be edited
+###############################################
+
+[ req ]
+default_bits = 4096
+distinguished_name  = req_distinguished_name
+req_extensions     = req_ext
+
+[ req_distinguished_name ]
+countryName                  = Country Name (2 letter code)
+countryName_default          = RU
+stateOrProvinceName          = State or Province Name (full name)
+stateOrProvinceName_default  = Russia
+localityName                 = Locality Name (eg, city)
+localityName_default         = Irkutsk
+organizationName             = Organization Name (eg, company)
+organizationName_default     = Example, Co.
+commonName                   = Common Name (eg, YOUR name or FQDN)
+commonName_max               = 64
+
+[ req_ext ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+
+###############################################
+# Edit this line to set subjectAltName contents
+###############################################
+subjectAltName          = DNS:localhost
