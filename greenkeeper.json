@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "auth-server/package.json",
+        "frontend-server/package.json",
+        "package.json",
+        "ui-util/package.json"
+      ]
+    }
+  }
+}
