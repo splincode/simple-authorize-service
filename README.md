@@ -1,5 +1,7 @@
 # Разработка программы  разграничения полномочий 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/splincode/simple-authorize-service.svg)](https://greenkeeper.io/)
+
 ![](https://habrastorage.org/webt/ru/ds/z1/rudsz1ejm9bhyxigaszc51pe7uw.png)
 
 Разработка распределенной системы  разграничения полномочий пользователей на основе парольной аутентификации
